@@ -21,4 +21,10 @@ public class Customer {
     private String zipcode;
     private String phone;
     private LocalDate registrationDate;
+
+    public Customer(String firstName, String lastName, LocalDate dob) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
+    }
 }
