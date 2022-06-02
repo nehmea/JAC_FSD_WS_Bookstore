@@ -15,4 +15,9 @@ public class Loan {
     private LocalDate dateOut;
     private LocalDate dateIn;
 
+    public Loan(int customerId, int bookId, LocalDate dateOut) {
+        this.customerId = customerId;
+        this.bookId = bookId;
+        this.dateOut = dateOut;
+    }
 }

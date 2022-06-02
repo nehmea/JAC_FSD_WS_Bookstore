@@ -26,4 +26,10 @@ public class Book {
     private String authors;
     private int numberOfCopies;
 
+    public Book(String isbn13, String title, String language, int numberOfCopies) {
+        this.isbn13 = isbn13;
+        this.title = title;
+        this.language = language;
+        this.numberOfCopies = numberOfCopies;
+    }
 }

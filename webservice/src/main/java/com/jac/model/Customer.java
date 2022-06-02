@@ -27,4 +27,16 @@ public class Customer {
         this.lastName = lastName;
         this.dob = dob;
     }
+
+    public Customer(String firstName, String lastName, LocalDate dob, String address, String city, String state, String zipcode, String phone, LocalDate registrationDate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zipcode = zipcode;
+        this.phone = phone;
+        this.registrationDate = registrationDate;
+    }
 }
