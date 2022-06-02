@@ -2,16 +2,19 @@ package com.jac.repository;
 
 import com.jac.exceptions.DatabaseException;
 import com.jac.exceptions.RecordDoesNotExistInDatabaseException;
+import com.jac.model.Book;
 import com.jac.model.Loan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.lang.reflect.Field;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
+@Repository
 public class LoanRepository {
 
     @Autowired
@@ -19,6 +22,9 @@ public class LoanRepository {
 
     @Autowired
     LoanRowMapper loanRowMapper;
+
+    @Autowired
+    BookRepository bookRepository;
 
     //  A function that returns all loans in the database
     public List<Loan> getAllLoans() {
@@ -57,6 +63,20 @@ public class LoanRepository {
         try {
             String sql = "SELECT * FROM loans WHERE customer_id=?";
             return jdbcTemplate.query(sql, loanRowMapper, bookId);
+        } catch (Exception exc) {
+            throw new DataRetrievalFailureException("An Exception occurred in LoanRepository.getLoanListByBookId");
+        }
+    }
+
+    //  A function that returns list of loans from the database by book isbn
+    public List<Loan> getLoanListByBookISBN(String isbn) {
+        Book fetchedBook = bookRepository.getBookByISBN(isbn);
+        if(fetchedBook == null) {
+            throw new RecordDoesNotExistInDatabaseException("Failed to retrieve a Loan with isbn " + isbn);
+        }
+        try {
+            String sql = "SELECT * FROM loans WHERE customer_id=?";
+            return jdbcTemplate.query(sql, loanRowMapper, fetchedBook.getId());
         } catch (Exception exc) {
             throw new DataRetrievalFailureException("An Exception occurred in LoanRepository.getLoanListByBookId");
         }

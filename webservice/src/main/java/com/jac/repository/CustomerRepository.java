@@ -1,6 +1,7 @@
 package com.jac.repository;
 
 import com.jac.exceptions.DatabaseException;
+import com.jac.exceptions.ItemExistException;
 import com.jac.exceptions.RecordDoesNotExistInDatabaseException;
 import com.jac.model.Book;
 import com.jac.model.Customer;
@@ -8,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
 import java.lang.reflect.Field;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -98,6 +98,10 @@ public class CustomerRepository {
 
     //  A function that saves a new customer into the database
     public Customer saveCustomer(Customer customer) {
+        Customer fetchedCustomer = getCustomerByInfo(customer.getFirstName(), customer.getLastName(), customer.getDob());
+        if(fetchedCustomer != null) {
+            throw new ItemExistException("A customer with the same info already exists in the repository");
+        }
         try {
             jdbcTemplate.update("Insert into customers " +
                             "firs_name, middle_name, last_name, date_of_birth, address, city," +

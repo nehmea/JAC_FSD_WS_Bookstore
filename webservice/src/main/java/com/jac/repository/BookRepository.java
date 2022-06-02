@@ -1,6 +1,7 @@
 package com.jac.repository;
 
 import com.jac.exceptions.DatabaseException;
+import com.jac.exceptions.ItemExistException;
 import com.jac.exceptions.RecordDoesNotExistInDatabaseException;
 import com.jac.model.Book;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,16 +59,15 @@ public class BookRepository {
     }
 
     //  A function that returns a book from the database by an author name
-    public Book getBookByAuthorName(String authorName) {
+    public List<Book> getBookByAuthorName(String authorName) {
         try {
 
             String sql = "SELECT * FROM books WHERE authors LIKE '%?%'";
-            return jdbcTemplate.queryForObject(sql, bookRowMapper, authorName);
+            return jdbcTemplate.query(sql, bookRowMapper, authorName);
         } catch (Exception exc) {
             throw new DataRetrievalFailureException("An Exception occurred in BookRepository.getBookByAuthorName" + authorName);
         }
     }
-
 
     //  A function that updates a book in the database by its id
     public Book updateBookById(int id, Book book) throws IllegalAccessException {
@@ -113,7 +113,7 @@ public class BookRepository {
         Book fetchedBook = getBookByISBN(isbn);
 
         if(fetchedBook == null) {
-            throw new RecordDoesNotExistInDatabaseException("Failed to retrieve a Loan with id " + isbn);
+            throw new RecordDoesNotExistInDatabaseException("Failed to retrieve a Loan with isbn " + isbn);
         }
 
         // returns the array of Field objects
@@ -149,6 +149,10 @@ public class BookRepository {
 
     //  A function that saves a new book in the database
     public Book saveBook(Book book) {
+        Book fetchedBook = getBookByISBN(book.getIsbn13());
+        if(fetchedBook != null) {
+            throw new ItemExistException("A book with the same ISBN already exists in the repository");
+        }
         try {
             jdbcTemplate.update("Insert into books " +
                             "(isbn13, isbn10, title, language, binding, release_date, edition, page, dimensions, rating, publisher, authors, copies, " +
