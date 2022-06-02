@@ -31,21 +31,13 @@ public class BookService {
     }
 
     //    get book by isbn
-    public Book getBookByisbn(String isbn) {
-        try {
+    public Book getBookByISBN(String isbn) {
             return repository.getBookByISBN(isbn);
-        } catch (DataRetrievalFailureException exc) {
-            return null;
-        }
     }
 
     //    get book by authorName
-    public Book getBookAuthorName(String authorName) {
-        try {
+    public List<Book> getBookByAuthorName(String authorName) {
             return repository.getBookByAuthorName(authorName);
-        } catch (DataRetrievalFailureException exc) {
-            return null;
-        }
     }
 
     //    update book by id
@@ -64,8 +56,13 @@ public class BookService {
 
     }
 
-    //    delete a book
+    //    delete a book by id
     public void deleteBookById(int id) {
         repository.deleteBookById(id);
+    }
+
+    //    delete a book by isbn
+    public void deleteBookByISBN(String isbn) {
+        repository.deleteBookByISBN(isbn);
     }
 }
