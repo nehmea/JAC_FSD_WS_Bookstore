@@ -1,0 +1,85 @@
+@charset "utf-8";
+
+#index-container {
+    background-image: url("../images/books-library-door.jpg");
+    height: 100vh;
+    padding-top: 200px;
+    height: 100vh;
+}
+
+.btn a {
+    text-decoration: none;
+    color: black;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.btn {
+    height: 50px;
+}
+
+/* Books */
+#books-container {
+    background-color: antiquewhite;
+    background-image: url("../images/background-book.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+}
+
+label {
+    font-weight: bolder;
+}
+
+.nav-item a {
+    text-decoration: none;
+    color: black;
+    font-size: larger;
+    font-weight: bold;
+}
+
+/* Books fetch */
+#books-fetch-container {
+    background-color: antiquewhite;
+    background-image: url("../images/background-book.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+}
+
+h1 {
+    margin: 20px;
+}
+
+/* Books update */
+#books-update-container {
+    background-color: antiquewhite;
+    background-image: url("../images/background-book.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+}
+
+
+/* Books delete */
+#books-delete-container {
+    background-color: antiquewhite;
+    background-image: url("../images/background-book.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}
+
+/* Customers fetch */
+#customers-fetch-container {
+    background-color: antiquewhite;
+    background-image: url("../images/background-book.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+}
