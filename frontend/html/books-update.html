@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books | Update</title>
+
+    <!-- styles -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container mx-auto" id="books-update-container">
+        <header>
+            <nav>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                            aria-expanded="false">Books</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="books-fetch.html">Fetch</a></li>
+                            <li><a class="dropdown-item" href="#">List All Books</a></li>
+                            <li><a class="dropdown-item" href="#">Get a Book by ID</a></li>
+                            <li><a class="dropdown-item" href="#">Get a Book by ISBN</a></li>
+                            <li><a class="dropdown-item" href="#">Get a Book by Author Name</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                                <a href="books-update.html">Update</a>
+                            </li>
+                            <li><a class="dropdown-item" href="books-update.html">Update a Book by ID</a></li>
+                            <li><a class="dropdown-item" href="books-update.html">Update a Book by ISBN</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                                <a href="books-update.html">Save</a>
+                            </li>
+                            <li><a class="dropdown-item" href="books-update.html">Save a New Book</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                                <a href="books-delete.html">Delete</a>
+                            </li>
+                            <li><a class="dropdown-item" href="#">Delete a Book by ID</a></li>
+                            <li><a class="dropdown-item" href="#">Delete a Book by ISBN</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                            aria-expanded="false">Customers</a>
+                        <ul class="dropdown-menu">
+                                <li><a href="">Fetch</a></li>
+                            <li><a class="dropdown-item" href="#">List All Customers</a></li>
+                            <li><a class="dropdown-item" href="#">Get a Customer by ID</a></li>
+                            <li><a class="dropdown-item" href="#">Get a Customer by Information</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                                <li><a href="">Update</a></li>
+                            </li>
+                            <li><a class="dropdown-item" href="#">Update a Customer by ID</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                                <li><a href="">Save</a></li>
+                            </li>
+                            <li><a class="dropdown-item" href="#">Save a New Customer</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                                <li><a href="">Delete</a></li>
+                            </li>
+                            <li><a class="dropdown-item" href="#">Delete a Customer by ID</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                            aria-expanded="false">Loans</a>
+                        <ul class="dropdown-menu">
+                                <li><a href="">Fetch</a></li>
+                            <li><a class="dropdown-item" href="#">List All Loans</a></li>
+                            <li><a class="dropdown-item" href="#">Get a Loan by ID</a></li>
+                            <li><a class="dropdown-item" href="#">Get Loans by Customer ID</a></li>
+                            <li><a class="dropdown-item" href="#">Get Loans by Book ID</a></li>
+                            <li><a class="dropdown-item" href="#">Get Loans by Book ISBN</a></li>
+                            <li><a class="dropdown-item" href="#">Get Last Loan of a Customer</a></li>
+                            <li><a class="dropdown-item" href="#">Get Last Loan of a Customer</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                                <a href="">Update</a>
+                            </li>
+                            <li><a class="dropdown-item" href="#">Update a Loan by ID</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                                <li><a href="">Save</a></li>
+                            </li>
+                            <li><a class="dropdown-item" href="#">Save a New Loan</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                                <li><a href="">Delete</a></li>
+                            </li>
+                            <li><a class="dropdown-item" href="#">Delete a Loan by ID</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <h1 class="text-center">Update a Book Record</h1>
+            <form action="#" >
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label text-right" for="book_id">Book ID</label>
+                    <div class="col-sm">
+                        <input class="form-control" type="number" name="book_id" id="book_id" placeholder="1">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label" for="isbn13">ISBN-13</label>
+                    <div class="col-sm">
+                        <input class="form-control" type="text" name="isbn13" id="isbn13" placeholder="9781118771334">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label" for="isbn10">ISBN-10</label>
+                    <div class="col-sm">
+                        <input class="form-control" type="text" name="isbn10" id="isbn10" placeholder="1118771338">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label" for="title">Book Title</label>
+                    <div class="col-sm">
+                        <input class="form-control" type="text" name="title" id="title" placeholder="Data Structures and Algorithms in Java">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label" for="language">Language</label>
+                    <div class="col-sm">
+                        <input class="form-control" type="text" name="language" id="language" placeholder="English">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label" for="binding">Binding</label>
+                    <div class="col-sm">
+                        <input class="form-control" type="text" name="binding" id="binding" placeholder="Paperback">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label" for="release_date">Date Released</label>
+                    <div class="col-sm">
+                        <input class="form-control" type="text" name="release_date" id="release_date" placeholder="2014-01-28">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label" for="edition">Edition</label>
+                    <div class="col-sm">
+                        <input class="form-control" type="text" name="edition" id="edition" placeholder="6th Edition">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label" for="pages">Number of pages</label>
+                    <div class="col-sm">
+                        <input class="form-control" type="number" name="pages" id="pages" min="1" placeholder="763">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label" for="dimensions">Dimensions</label>
+                    <div class="col-sm">
+                        <input class="form-control" type="text" name="dimensions" id="dimensions" placeholder="18.8 x 3.05 x 23.37 cm">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label" for="rating">Rating</label>
+                    <div class="col-sm">
+                        <input class="form-control" type="number" name="rating" id="rating" min="1" step="0.1" placeholder="4.2">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label" for="publisher">Publisher(s)</label>
+                    <div class="col-sm">
+                        <input class="form-control" type="text" name="publisher" id="publisher" placeholder="Wiley">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label" for="author">Author(s)</label>
+                    <div class="col-sm">
+                        <input class="form-control" type="text" name="author" id="author" placeholder=" Michael T. Goodrich, Roberto Tamassia, Michael H. Goldwasser">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label" for="copies">Number of copies</label>
+                    <div class="col-sm">
+                        <input class="form-control" type="number" name="copies" id="copies" step="1" min="0" placeholder="10">
+                    </div>
+                </div>
+                <div class="d-grid gap-5 d-md-flex justify-content-md-center">
+                    <button class="btn btn-light" type="button">Update Record</button>
+                    <button class="btn btn-light" type="button">Save New Record</button>
+                </div>
+                <br>
+        </div>
+
+    </form>
+</div>
+</body>
+
+</html>
