@@ -1,9 +1,7 @@
-package com.jac.service;
+package com.jac.webservice.service;
 
-import com.jac.exceptions.DatabaseException;
-import com.jac.exceptions.RecordDoesNotExistInDatabaseException;
-import com.jac.model.Book;
-import com.jac.repository.BookRepository;
+import com.jac.webservice.model.Book;
+import com.jac.webservice.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.stereotype.Service;

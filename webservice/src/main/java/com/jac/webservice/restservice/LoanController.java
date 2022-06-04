@@ -1,17 +1,16 @@
-package com.jac.restservice;
+package com.jac.webservice.restservice;
 
-import com.jac.exceptions.DatabaseException;
-import com.jac.exceptions.ItemExistException;
-import com.jac.exceptions.RecordDoesNotExistInDatabaseException;
-import com.jac.model.Loan;
-import com.jac.service.LoanService;
+import com.jac.webservice.exceptions.DatabaseException;
+import com.jac.webservice.exceptions.ItemExistException;
+import com.jac.webservice.exceptions.RecordDoesNotExistInDatabaseException;
+import com.jac.webservice.model.Loan;
+import com.jac.webservice.service.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController

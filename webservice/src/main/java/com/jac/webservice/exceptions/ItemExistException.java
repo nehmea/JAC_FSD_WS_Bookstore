@@ -1,4 +1,4 @@
-package com.jac.exceptions;
+package com.jac.webservice.exceptions;
 
 public class ItemExistException extends RuntimeException {
 

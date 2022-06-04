@@ -1,10 +1,9 @@
-package com.jac.repository;
+package com.jac.webservice.repository;
 
-import com.jac.exceptions.DatabaseException;
-import com.jac.exceptions.ItemExistException;
-import com.jac.exceptions.RecordDoesNotExistInDatabaseException;
-import com.jac.model.Book;
-import com.jac.model.Customer;
+import com.jac.webservice.exceptions.DatabaseException;
+import com.jac.webservice.exceptions.ItemExistException;
+import com.jac.webservice.exceptions.RecordDoesNotExistInDatabaseException;
+import com.jac.webservice.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -92,7 +91,7 @@ public class CustomerRepository {
                     id);
             return getCustomerById(id);
         } catch (Exception exc) {
-            throw new DatabaseException("An exception occurred in CustomerRepository.updateCustomerById " + id);
+            throw new DatabaseException(exc.getCause());
         }
     }
 
@@ -127,7 +126,7 @@ public class CustomerRepository {
             jdbcTemplate.update("delete from customers where id=?", id);
         }
         catch (Exception exc) {
-            throw new DatabaseException("an exception occurred in CustomerRepository.deleteCustomerById " + id);
+            throw new DatabaseException(exc.getCause());
         }
     }
 

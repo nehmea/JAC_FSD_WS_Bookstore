@@ -1,7 +1,6 @@
-package com.jac.repository;
+package com.jac.webservice.repository;
 
-import com.jac.model.Book;
-import com.jac.model.Customer;
+import com.jac.webservice.model.Customer;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

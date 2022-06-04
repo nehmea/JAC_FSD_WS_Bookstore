@@ -1,6 +1,6 @@
-package com.jac.repository;
+package com.jac.webservice.repository;
 
-import com.jac.model.Book;
+import com.jac.webservice.model.Book;
 
 import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
@@ -17,7 +17,11 @@ public class BookRowMapper implements RowMapper<Book> {
         book.setTitle(rs.getString("title"));
         book.setLanguage(rs.getString("language"));
         book.setBinding(rs.getString("binding"));
-        book.setRelease_date(rs.getDate("date").toLocalDate());
+        if ((rs.getDate("release_date") == null)) {
+            book.setRelease_date(null);
+        } else {
+            book.setRelease_date(rs.getDate("release_date").toLocalDate());
+        }
         book.setEdition(rs.getString("edition"));
         book.setPages(rs.getInt("pages"));
         book.setDimensions(rs.getString("dimensions"));

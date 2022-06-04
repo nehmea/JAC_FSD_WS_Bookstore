@@ -1,9 +1,7 @@
-package com.jac.service;
+package com.jac.webservice.service;
 
-import com.jac.model.Customer;
-import com.jac.model.Customer;
-import com.jac.repository.CustomerRepository;
-import com.jac.repository.CustomerRepository;
+import com.jac.webservice.model.Customer;
+import com.jac.webservice.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.stereotype.Service;

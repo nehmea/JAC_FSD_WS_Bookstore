@@ -1,4 +1,4 @@
-package com.jac.exceptions;
+package com.jac.webservice.exceptions;
 
 public class RecordDoesNotExistInDatabaseException extends RuntimeException {
 

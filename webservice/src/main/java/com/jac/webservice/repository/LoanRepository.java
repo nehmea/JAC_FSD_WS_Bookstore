@@ -1,9 +1,9 @@
-package com.jac.repository;
+package com.jac.webservice.repository;
 
-import com.jac.exceptions.DatabaseException;
-import com.jac.exceptions.RecordDoesNotExistInDatabaseException;
-import com.jac.model.Book;
-import com.jac.model.Loan;
+import com.jac.webservice.exceptions.DatabaseException;
+import com.jac.webservice.exceptions.RecordDoesNotExistInDatabaseException;
+import com.jac.webservice.model.Book;
+import com.jac.webservice.model.Loan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -136,7 +136,7 @@ public class LoanRepository {
 
             return getLoanById(id);
         } catch (Exception exc) {
-            throw new DatabaseException("An exception occurred in updateLoan " + id);
+            throw new DatabaseException(exc.getCause());
         }
     }
 
@@ -155,7 +155,7 @@ public class LoanRepository {
 
             return getLoanById(id);
         } catch (Exception exc) {
-            throw new DatabaseException("An exception occurred in updateLoan " + id);
+            throw new DatabaseException(exc.getCause());
         }
     }
 
@@ -180,7 +180,7 @@ public class LoanRepository {
         try {
             jdbcTemplate.update("delete from loans where id=?", id);
         } catch (Exception exc) {
-            throw new DatabaseException("an exception occurred in deleteLoanById " + id);
+            throw new DatabaseException(exc.getCause());
         }
     }
 }

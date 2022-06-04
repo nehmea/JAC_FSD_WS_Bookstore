@@ -1,4 +1,4 @@
-package com.jac.model;
+package com.jac.webservice.model;
 
 import lombok.*;
 

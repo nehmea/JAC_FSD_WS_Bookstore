@@ -1,4 +1,4 @@
-package com.jac.model;
+package com.jac.webservice.model;
 
 import lombok.*;
 
@@ -26,10 +26,9 @@ public class Book {
     private String authors;
     private int numberOfCopies;
 
-    public Book(String isbn13, String title, String language, int numberOfCopies) {
+    public Book(String isbn13, String title, String language) {
         this.isbn13 = isbn13;
         this.title = title;
         this.language = language;
-        this.numberOfCopies = numberOfCopies;
     }
 }

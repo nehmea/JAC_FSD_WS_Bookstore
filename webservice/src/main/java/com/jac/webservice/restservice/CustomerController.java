@@ -1,10 +1,10 @@
-package com.jac.restservice;
+package com.jac.webservice.restservice;
 
-import com.jac.exceptions.DatabaseException;
-import com.jac.exceptions.ItemExistException;
-import com.jac.exceptions.RecordDoesNotExistInDatabaseException;
-import com.jac.model.Customer;
-import com.jac.service.CustomerService;
+import com.jac.webservice.exceptions.DatabaseException;
+import com.jac.webservice.exceptions.ItemExistException;
+import com.jac.webservice.exceptions.RecordDoesNotExistInDatabaseException;
+import com.jac.webservice.model.Customer;
+import com.jac.webservice.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.http.HttpStatus;
