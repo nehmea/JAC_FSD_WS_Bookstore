@@ -19,108 +19,7 @@
 
 <body>
     <div class="container mx-auto" id="books-fetch-container">
-        <header>
-            <nav>
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../index.html">Home</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                            aria-expanded="false">Books</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="">Fetch</a></li>
-                            <li><a class="dropdown-item" href="books-fetch.html#getAllBooks">List All Books</a></li>
-                            <li><a class="dropdown-item" href="books-fetch.html#getBookByID">Get a Book by ID</a></li>
-                            <li><a class="dropdown-item" href="books-fetch.html#getBookByISBN">Get a Book by ISBN</a>
-                            </li>
-                            <li><a class="dropdown-item" href="books-fetch.html#getBookByAuthor">Get a Book by Author
-                                    Name</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            <li><a href="books-update.html">Update</a></li>
-                    </li>
-                    <li><a class="dropdown-item" href="books-update.html">Update a Book by ID</a></li>
-                    <li><a class="dropdown-item" href="books-update.html">Update a Book by ISBN</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    <li><a href="books-update.html">Save</a></li>
-                    </li>
-                    <li><a class="dropdown-item" href="books-update.html">Save a New Book</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    <li><a href="books-delete.html">Delete</a></li>
-                    </li>
-                    <li><a class="dropdown-item" href="books-delete.html#deleteBookByID">Delete a Book by ID</a></li>
-                    <li><a class="dropdown-item" href="books-delete.html#deleteBookByISBN">Delete a Book by ISBN</a>
-                    </li>
-                </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                        aria-expanded="false">Customers</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="customers-fetch.html">Fetch</a></li>
-                        <li><a class="dropdown-item" href="customers-fetch.html#getAllCustomers">List All Customers</a>
-                        </li>
-                        <li><a class="dropdown-item" href="customers-fetch.html#getCustomerByID">Get a Customer by
-                                ID</a></li>
-                        <li><a class="dropdown-item" href="customers-fetch.html#getCustomerByInfo">Get a Customer by
-                                Information</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        <li><a href="customers-update.html">Update</a></li>
-                </li>
-                <li><a class="dropdown-item" href="customers-update.html">Update a Customer by ID</a></li>
-                <li>
-                    <hr class="dropdown-divider">
-                <li><a href="customers-update.html">Save</a></li>
-                </li>
-                <li><a class="dropdown-item" href="customers-update.html">Save a New Customer</a></li>
-                <li>
-                    <hr class="dropdown-divider">
-                <li><a href="customer-delete.html">Delete</a></li>
-                </li>
-                <li><a class="dropdown-item" href="customer-delete.html">Delete a Customer by ID</a></li>
-                </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                        aria-expanded="false">Loans</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="loans-fetch.html">Fetch</a></li>
-                        <li><a class="dropdown-item" href="loans-fetch.html#getAllLoans">List All Loans</a></li>
-                        <li><a class="dropdown-item" href="loans-fetch.html#getLoanById">Get a Loan by ID</a></li>
-                        <li><a class="dropdown-item" href="loans-fetch.html#getLoanByCustomerId">Get Loans by Customer
-                                ID</a></li>
-                        <li><a class="dropdown-item" href="loans-fetch.html#getLoanByBookId">Get Loans by Book ID</a>
-                        </li>
-                        <li><a class="dropdown-item" href="loans-fetch.html#getLoanByBookISBN">Get Loans by Book
-                                ISBN</a></li>
-                        <li><a class="dropdown-item" href="loans-fetch.html#getLastLoanByCustomerId">Get Last Loan of a
-                                Customer</a></li>
-                        <li><a class="dropdown-item" href="loans-fetch.html#getLastLoanByBookId">Get Last Loan of a
-                                Book</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                            <a href="loans-update.html">Update</a>
-                        </li>
-                        <li><a class="dropdown-item" href="loans-update.html">Update a Loan by ID</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        <li><a href="loans-update.html">Save</a></li>
-                </li>
-                <li><a class="dropdown-item" href="loans-update.html">Save a New Loan</a></li>
-                <li>
-                    <hr class="dropdown-divider">
-                <li><a href="loans-delete.html">Delete</a></li>
-                </li>
-                <li><a class="dropdown-item" href="loans-delete.html">Delete a Loan by ID</a></li>
-                </ul>
-                </li>
-                </ul>
-            </nav>
-        </header>
+        <header id="header"></header>
 
         <div class="d-grid gap-2 col-10 mx-auto">
             <h1 class="text-center">Fetch Records from the Database</h1>
@@ -130,29 +29,29 @@
                     <button class="btn btn-light" type="button" onclick="getAllBooks();">List All Books</button>
                 </fieldset>
                 <br>
-                <fieldset id="getBookById" class="d-grid gap-0 col-6 mx-auto">
+                <fieldset id="get_book_by_id" class="d-grid gap-0 col-6 mx-auto">
                     <legend class="text-center">Get a Book by ID</legend>
                     <div class="form-floating mb-3">
                         <input type="number" class="form-control" id="getBookByID_bookID" placeholder="1">
                         <label for="getBookByID_bookID">Book ID</label>
                     </div>
                     <div class="mx-auto">
-                        <button class="btn btn-light" type="button">Get Record</button>
+                        <button class="btn btn-light" type="button"  onclick="getBookByID();">Get Record</button>
                     </div>
                 </fieldset>
                 <br>
-                <fieldset id="getBookByISBN" class="d-grid gap-0 col-6 mx-auto">
+                <fieldset id="get_book_by_isbn" class="d-grid gap-0 col-6 mx-auto">
                     <legend class="text-center">Get a Book by ISBN</legend>
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="getBookByISBN_isbn" placeholder="9781118771334">
                         <label for="getBookByISBN_isbn">ISBN</label>
                     </div>
                     <div class="mx-auto">
-                        <button class="btn btn-light" type="button">Get Record</button>
+                        <button class="btn btn-light" type="button" onclick="getBookByISBN();">Get Record</button>
                     </div>
                 </fieldset>
                 <br>
-                <fieldset id="getBookByAuthor" class="d-grid gap-0 col-6 mx-auto">
+                <fieldset id="" class="d-grid gap-0 col-6 mx-auto">
                     <legend class="text-center">Get a Book by Author Name</legend>
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="getBookByAuthor_authorName"
@@ -160,7 +59,7 @@
                         <label for="getBookByAuthor_authorName">Author Name</label>
                     </div>
                     <div class="mx-auto">
-                        <button class="btn btn-light" type="button">Get Record</button>
+                        <button class="btn btn-light" type="button" onclick="getBookByAuthor();">Get Record</button>
                     </div>
                     <br>
                 </fieldset>
@@ -171,8 +70,8 @@
     </div>
     <br>
     <br>
-    <div class="d-grid gap-2 col-10 mx-auto">
-        <table id="table" class="table table-striped table-hover table-sm" data-show-columns="true"  data-custom-sort="customSort">
+    <div class="d-grid gap-2 col-10 mx-auto" id="targetDiv">
+        <!-- <table id="books_table" class="table table-striped table-hover table-sm"> -->
             <!-- <thead>
                 <tr>
                     <th data-field="id">Item ID</th>
@@ -191,35 +90,18 @@
                     <th data-field="edition">Edition</th>
                 </tr>
             </thead> -->
-        </table>
-        <pre id="targetDiv"></pre>
+        <!-- </table> -->
     </div>
 
-
-    <script src="../scripts/books.js"></script>
     <!-- script -->
+    <script src="../scripts/books.js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
     <script src="https://unpkg.com/bootstrap-table@1.20.2/dist/bootstrap-table.min.js"></script>
-    <script>
-        function customSort(sortName, sortOrder, data) {
-          var order = sortOrder === 'desc' ? -1 : 1
-          data.sort(function (a, b) {
-            var aa = +((a[sortName] + '').replace(/[^\d]/g, ''))
-            var bb = +((b[sortName] + '').replace(/[^\d]/g, ''))
-            if (aa < bb) {
-              return order * -1
-            }
-            if (aa > bb) {
-              return order
-            }
-            return 0
-          })
-        }
-      </script>
+    <script src="../scripts/nav.js"></script>
 </body>
 
 </html>
