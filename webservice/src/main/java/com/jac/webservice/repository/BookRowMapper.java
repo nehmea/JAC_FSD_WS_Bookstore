@@ -5,6 +5,7 @@ import com.jac.webservice.model.Book;
 import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class BookRowMapper implements RowMapper<Book> {
 

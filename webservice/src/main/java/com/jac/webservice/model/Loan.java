@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @ToString
 public class Loan {
+    private int id;
     private int customerId;
     private int bookId;
     private LocalDate dateOut;
@@ -19,5 +20,10 @@ public class Loan {
         this.customerId = customerId;
         this.bookId = bookId;
         this.dateOut = dateOut;
+    }
+
+    public Loan(int id, LocalDate dateIn) {
+        this.id = id;
+        this.dateIn = dateIn;
     }
 }

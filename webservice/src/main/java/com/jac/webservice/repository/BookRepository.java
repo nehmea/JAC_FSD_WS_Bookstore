@@ -4,6 +4,7 @@ import com.jac.webservice.exceptions.DatabaseException;
 import com.jac.webservice.exceptions.ItemExistException;
 import com.jac.webservice.exceptions.RecordDoesNotExistInDatabaseException;
 import com.jac.webservice.model.Book;
+import com.jac.webservice.model.Loan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -55,7 +56,7 @@ public class BookRepository {
         }
     }
 
-    //  A function that returns a book from the database by an author name
+    //  A function that returns books from the database by an author name
     public List<Book> getBookByAuthorName(String authorName) {
         try {
 
@@ -196,5 +197,29 @@ public class BookRepository {
                 throw new DatabaseException(exc.getCause());
             }
         }
+
+//        check if book exist by id
+public Boolean checkIfBookExistByID(int id) {
+    String sql = "SELECT count(*) FROM books WHERE id = ?";
+    int count = jdbcTemplate.queryForObject(sql, Integer.class, id);
+
+    return count != 0;
+}
+
+    //        check if book exist by isbn
+    public Boolean checkIfBookExistByISBN(String isbn) {
+        String sql = (isbn.length() == 13) ? "SELECT count(*) FROM books WHERE isbn13 = ?" : "SELECT count(*) FROM books WHERE isbn10 = ?";
+        int count = jdbcTemplate.queryForObject(sql, Integer.class, isbn);
+
+        return count != 0;
+    }
+
+    public Boolean checkIfBookExistByAuthor(String authorName) {
+
+        String sql = "SELECT * FROM books WHERE authors LIKE ?";
+        int count = jdbcTemplate.queryForObject(sql, Integer.class, "%" + authorName + "%");
+
+        return count != 0;
+    }
 
 }

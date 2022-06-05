@@ -28,10 +28,7 @@ public class CustomerRepository {
         String sql = "SELECT count(*) FROM customers WHERE id = ?";
         int count = jdbcTemplate.queryForObject(sql, Integer.class, id);
 
-        if (count == 0) {
-            return false;
-        }
-        return true;
+        return count != 0;
     }
 
     //    a helper function that checks for the number of customers by info in the database
@@ -46,10 +43,7 @@ public class CustomerRepository {
     public Boolean checkIfCustomerExistByInfo(String firstName, String lastName, LocalDate dob) {
         int count = countCustomerByInfo(firstName, lastName, dob);
 
-        if (count == 0) {
-            return false;
-        }
-        return true;
+        return count != 0;
     }
 
     //  A function that returns all customers in the database

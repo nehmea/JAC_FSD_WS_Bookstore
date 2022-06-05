@@ -16,13 +16,21 @@ public class CustomerRowMapper implements RowMapper<Customer> {
         customer.setFirstName(rs.getString("first_name"));
         customer.setMiddleName(rs.getString("middle_name"));
         customer.setLastName(rs.getString("last_name"));
+        if ((rs.getDate("date_of_birth") == null)) {
+            customer.setDob(null);
+        } else {
+            customer.setDob(rs.getDate("date_of_birth").toLocalDate());
+        }
         customer.setDob(rs.getDate("date_of_birth").toLocalDate());
         customer.setAddress(rs.getString("address"));
         customer.setCity(rs.getString("city"));
         customer.setZipcode(rs.getString("zipcode"));
         customer.setPhone(rs.getString("phone"));
-        customer.setRegistrationDate(rs.getDate("registration_date").toLocalDate());
-
+        if ((rs.getDate("registration_date") == null)) {
+            customer.setRegistrationDate(null);
+        } else {
+            customer.setRegistrationDate(rs.getDate("registration_date").toLocalDate());
+        }
         return customer;
     }
 }
