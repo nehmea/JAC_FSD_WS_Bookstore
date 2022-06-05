@@ -21,21 +21,11 @@ public class CustomerService {
     }
 
     //    get customer by id
-    public Customer getCustomerById(int id) {
-        try {
-            return repository.getCustomerById(id);
-        } catch (DataRetrievalFailureException exc) {
-            return null;
-        }
-    }
+    public Customer getCustomerById(int id) { return repository.getCustomerById(id); }
 
     //    get customer by info
     public Customer getCustomerByInfo(String firstName, String lastName, LocalDate dob) {
-        try {
-            return repository.getCustomerByInfo(firstName, lastName, dob);
-        } catch (DataRetrievalFailureException exc) {
-            return null;
-        }
+        return repository.getCustomerByInfo(firstName, lastName, dob);
     }
 
     //    update customer by id

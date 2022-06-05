@@ -1,5 +1,6 @@
 package com.jac.webservice.service;
 
+import com.jac.webservice.exceptions.DatabaseException;
 import com.jac.webservice.model.Book;
 import com.jac.webservice.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +22,8 @@ public class BookService {
 
     //    get book by id
     public Book getBookById(int id) {
-        try {
-            return repository.getBookById(id);
-        } catch (DataRetrievalFailureException exc) {
-            return null;
-        }
+      return repository.getBookById(id);
+
     }
 
     //    get book by isbn
