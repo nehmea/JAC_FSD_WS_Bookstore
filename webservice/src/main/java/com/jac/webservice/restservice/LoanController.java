@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/loans")
+@CrossOrigin(maxAge = 60000)
 public class LoanController {
 
     @Autowired

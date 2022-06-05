@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/books")
+@CrossOrigin(maxAge = 60000)
 public class BookController {
 
     @Autowired

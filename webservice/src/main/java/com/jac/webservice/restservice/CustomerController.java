@@ -21,6 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/customers")
+@CrossOrigin(maxAge = 60000)
 public class CustomerController {
 
     @Autowired
