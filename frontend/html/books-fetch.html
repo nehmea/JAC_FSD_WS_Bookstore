@@ -115,9 +115,9 @@
         <div class="d-grid gap-2 col-10 mx-auto">
             <h1 class="text-center">Fetch Records from the Database</h1>
             <form action="#">
-                <fieldset id="getAllBooks" class="d-grid gap-2 col-6 mx-auto">
+                <fieldset id="get_all_books" class="d-grid gap-2 col-6 mx-auto">
                     <legend class="text-center">List All books in the database</legend>
-                        <button class="btn btn-light" type="button">List All Books</button>
+                        <button class="btn btn-light" type="button" onclick="getAllBooks();">List All Books</button>
                       </fieldset>
               <br>
               <fieldset id="getBookById" class="d-grid gap-0 col-6 mx-auto">
@@ -157,8 +157,14 @@
         </div>
 
     </form>
-    <div id="targetDiv"></div>
 </div>
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <pre id="targetDiv"></pre>
+    </div>
+
+
+<script src="../scripts/books.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 
 </html>

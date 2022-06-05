@@ -1,4 +1,4 @@
-const HOST = "http://localhost:8085/books"
+const HOST = "http://localhost:8045/books"
 
 function getAllBooks() {
     $.ajax(
@@ -7,7 +7,7 @@ function getAllBooks() {
             url: `${HOST}`
         }
     ).done((response) => {
-       document.getElementById('targetDiv').append(response);
+       document.getElementById('targetDiv').append(JSON.stringify(response, undefined, 2));
     }).fail((obj, textStatus) => {
         if(obj && obj.responseJSON && obj.responseJSON.message) {
             alert(obj.responseJSON.message);
