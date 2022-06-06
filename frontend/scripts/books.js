@@ -141,8 +141,7 @@ function getBookByID() {
   ).done((response) => {
     createTargetTable();
     $('#books_table').bootstrapTable({
-      pagination: true,
-      search: true,
+     
       columns: book_columns,
       data: [response]
 
@@ -172,8 +171,7 @@ function getBookByISBN() {
   ).done((response) => {
     createTargetTable();
     $('#books_table').bootstrapTable({
-      pagination: true,
-      search: true,
+     
       columns: book_columns,
       data: [response]
 
@@ -249,8 +247,7 @@ function saveRecord() {
 
     createTargetTable();
     $('#books_table').bootstrapTable({
-      pagination: true,
-      search: true,
+     
       columns: book_columns,
       data: [response]
 
@@ -315,8 +312,7 @@ function updateRecord() {
 
     createTargetTable();
     $('#books_table').bootstrapTable({
-      pagination: true,
-      search: true,
+     
       columns: book_columns,
       data: [response]
     })

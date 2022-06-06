@@ -83,8 +83,7 @@ function getAllLoans() {
   ).done((response) => {
     createTargetTable();
     $('#loan_table').bootstrapTable({
-      pagination: true,
-      search: true,
+     
       columns: book_columns,
       data: response
 
@@ -115,8 +114,7 @@ function getLoanByID() {
   ).done((response) => {
     createTargetTable();
     $('#loan_table').bootstrapTable({
-      pagination: true,
-      search: true,
+     
       columns: book_columns,
       data: [response]
 
@@ -147,8 +145,7 @@ function getLoanByID() {
   ).done((response) => {
     createTargetTable();
     $('#loan_table').bootstrapTable({
-      pagination: true,
-      search: true,
+     
       columns: book_columns,
       data: response
 
@@ -180,8 +177,7 @@ function getLoanByID() {
   ).done((response) => {
     createTargetTable();
     $('#loan_table').bootstrapTable({
-      pagination: true,
-      search: true,
+     
       columns: book_columns,
       data: response
 
@@ -212,8 +208,7 @@ function getLoanByID() {
   ).done((response) => {
     createTargetTable();
     $('#loan_table').bootstrapTable({
-      pagination: true,
-      search: true,
+     
       columns: book_columns,
       data: response
 
@@ -245,8 +240,7 @@ function getLoanByID() {
   ).done((response) => {
     createTargetTable();
     $('#loan_table').bootstrapTable({
-      pagination: true,
-      search: true,
+     
       columns: book_columns,
       data: [response]
 
@@ -278,8 +272,7 @@ function getLoanByID() {
   ).done((response) => {
     createTargetTable();
     $('#loan_table').bootstrapTable({
-      pagination: true,
-      search: true,
+     
       columns: book_columns,
       data: [response]
 
@@ -325,8 +318,7 @@ function saveRecord() {
 
     createTargetTable();
     $('#loan_table').bootstrapTable({
-      pagination: true,
-      search: true,
+     
       columns: book_columns,
       data: [response]
 
@@ -386,8 +378,7 @@ function updateRecord() {
 
     createTargetTable();
     $('#loan_table').bootstrapTable({
-      pagination: true,
-      search: true,
+     
       columns: book_columns,
       data: [response]
     })
@@ -445,8 +436,7 @@ function updateRecord() {
 
     createTargetTable();
     $('#loan_table').bootstrapTable({
-      pagination: true,
-      search: true,
+     
       columns: book_columns,
       data: [response]
     })

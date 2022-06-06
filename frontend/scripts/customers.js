@@ -142,8 +142,7 @@ function getCustomerByID() {
   ).done((response) => {
     createTargetTable();
     $('#customer_table').bootstrapTable({
-      pagination: true,
-      search: true,
+     
       columns: book_columns,
       data: [response]
 
@@ -184,8 +183,7 @@ function getCustomerByInfo() {
   ).done((response) => {
     createTargetTable();
     $('#customer_table').bootstrapTable({
-      pagination: true,
-      search: true,
+     
       columns: book_columns,
       data: [response]
     });
@@ -230,8 +228,7 @@ function saveRecord() {
 
     createTargetTable();
     $('#customer_table').bootstrapTable({
-      pagination: true,
-      search: true,
+     
       columns: book_columns,
       data: [response]
 
@@ -290,8 +287,7 @@ function updateRecord() {
 
     createTargetTable();
     $('#customer_table').bootstrapTable({
-      pagination: true,
-      search: true,
+     
       columns: book_columns,
       data: [response]
     })
