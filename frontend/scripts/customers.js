@@ -68,7 +68,16 @@ const book_columns = [{
  * Create new table: clear target div, then create a new table to load fetched data
  */
  function createTargetTable() {
-  $("#targetDiv").append(`<table id="customer_table" class="table table-striped table-hover table-sm"></table>`)
+  $("#targetDiv").append(
+    `<table id="customer_table" class="table table-striped table-hover table-sm" 
+    data-show-fullscreen="true"
+    data-show-columns="true"
+    data-show-pagination-switch="true"
+    data-pagination="true"
+    data-show-columns-toggle-all="true"
+    data-filter-control="true"
+    data-show-search-clear-button="true">
+    </table>`)
   // console.log($("#targetDiv table"));
 }
 
