@@ -50,10 +50,15 @@ const book_columns = [{
    */
   function createTargetTable() {
       $("#targetDiv").empty();
-    $("#targetDiv").prepend(`<table id="books_table" class="table table-striped table-hover table-sm"></table>`)
-        console.log($("#targetDiv table"));
+    $("#targetDiv").append(`<table id="books_table" class="table table-striped table-hover table-sm"></table>`)
+        // console.log($("#targetDiv table"));
   }
 
+  /**
+   * A method that converts form input into a JSON object
+   * @param {*} form 
+   * @returns 
+   */
   function convertFormToJSON(form) {
     const array = $(form).serializeArray(); // Encodes the set of form elements as an array of names and values.
     const json = {};
@@ -87,14 +92,13 @@ function getAllBooks() {
             
         });
        $("#targetDiv")[0].scrollIntoView();
-    }).fail((obj, textStatus) => {
-        if(obj && obj.responseJSON && obj.responseJSON.message) {
-            alert(obj.responseJSON.message);
-        }
-        if(obj && obj.responseText) {
-            alert(obj.responseText);
-        }
-    })
+    }).fail((response) => {
+      let warning = response.responseText;
+      $("#warnings").append(`<div class="alert alert-warning text-center" role="alert"><p>${warning}</p></div>`);
+      $("#warnings")[0].scrollIntoView();
+      console.log(warning);
+  
+    }) 
 }
 
 /**
@@ -117,14 +121,13 @@ function getBookByID() {
             
         });
        $("#targetDiv")[0].scrollIntoView();
-    }).fail((obj, textStatus) => {
-        if(obj && obj.responseJSON && obj.responseJSON.message) {
-            alert(obj.responseJSON.message);
-        }
-        if(obj && obj.responseText) {
-            alert(obj.responseText);
-        }
-    })
+    }).fail((response) => {
+      let warning = response.responseText;
+      $("#warnings").append(`<div class="alert alert-warning text-center" role="alert"><p>${warning}</p></div>`);
+      $("#warnings")[0].scrollIntoView();
+      console.log(warning);
+  
+    }) 
 }
 
 /**
@@ -147,14 +150,13 @@ function getBookByISBN() {
             
         });
        $("#targetDiv")[0].scrollIntoView();
-    }).fail((obj, textStatus) => {
-        if(obj && obj.responseJSON && obj.responseJSON.message) {
-            alert(obj.responseJSON.message);
-        }
-        if(obj && obj.responseText) {
-            alert(obj.responseText);
-        }
-    })
+    }).fail((response) => {
+      let warning = response.responseText;
+      $("#warnings").append(`<div class="alert alert-warning text-center" role="alert"><p>${warning}</p></div>`);
+      $("#warnings")[0].scrollIntoView();
+      console.log(warning);
+  
+    }) 
 }
 
 /**
@@ -177,91 +179,170 @@ function getBookByAuthor() {
             
         });
        $("#targetDiv")[0].scrollIntoView();
-    }).fail((obj, textStatus) => {
-        if(obj && obj.responseJSON && obj.responseJSON.message) {
-            alert(obj.responseJSON.message);
-        }
-        if(obj && obj.responseText) {
-            alert(obj.responseText);
-        }
-    })
+    }).fail((response) => {
+      let warning = response.responseText;
+      $("#warnings").append(`<div class="alert alert-warning text-center" role="alert"><p>${warning}</p></div>`);
+      $("#warnings")[0].scrollIntoView();
+      console.log(warning);
+  
+    }) 
 }
 
 
   // *******************************
   // save/post methods
   // *******************************
+  /**
+   * Save a new book to the database
+   */
   function saveRecord() {
+    $("#warnings").empty();
     const form = $("#book_update_form");
-    console.log(form)
     const json_data = JSON.stringify(convertFormToJSON(form));
-    console.log(json_data)
     $.ajax(
       {
         method: "post",
         url: `${HOST}`,
-        data: JSON.stringify(json_data),
+        data: json_data,
         headers: {
             "Accept": "application/json",
             "Content-type": "application/json"
         }
       }
   ).done((response) => {
+    $("#targetDiv").append(
+      `<div class="alert alert-success text-center" role="alert">
+      <p>Record saved!</p>
+      </div>`);
+
       createTargetTable();
       $('#books_table').bootstrapTable({
           pagination: true,
           search: true,
           columns: book_columns,
-            data: response
+            data: [response]
           
       });
      $("#targetDiv")[0].scrollIntoView();
-  }).fail((obj, textStatus) => {
-    alert("failed")
-      if(obj && obj.responseJSON && obj.responseJSON.message) {
-          alert(obj.responseJSON.message);
-      }
-      if(obj && obj.responseText) {
-          alert(obj.responseText);
-      }
-  })
-   
+  }).fail((response) => {
+    let warning = response.responseText;
+    $("#warnings").append(`<div class="alert alert-warning text-center" role="alert"><p>${warning}</p></div>`);
+    $("#warnings")[0].scrollIntoView();
+    console.log(warning);
+
+  })  
 }
 
   
   // *******************************
   // update/modify/put methods
   // *******************************
+  /**
+   * detects if id or isbn used to modify corresponding book
+   */
   function updateRecord() {
+    $("#warnings").empty();
+    // declare variables
+    const id = $('#book_id').val();
+    const isbn = $('#isbn13').val();
     const form = $("#book_update_form");
-    const json_data = convertFormToJSON(form);
+    const json_data = JSON.stringify(convertFormToJSON(form));
+    // define URL based on provided id or isbn
+    if(id==""  && isbn=="" ) {      
+      $("#warnings").append(
+        `<div class="alert alert-warning text-center" role="alert">
+        <p>Please supply a book ID or ISBN to update a record</p>
+        </div>`);
+        $("#warnings")[0].scrollIntoView();
+        throw new Error("Please supply a book ID or ISBN to update a record");
+    }
+    if(id) {
+      url = `${HOST}/book/id/${id}`;
+    } else if(isbn) {
+      url = `${HOST}/book/isbn/${isbn}`;
+    }
+
+    // call controller
     $.ajax(
       {
         method: "put",
-        url: `${HOST}/book/id/`,
-        data: json_data.json,
+        url: url,
+        data: json_data,
         headers: {
             "Accept": "application/json",
             "Content-type": "application/json"
         }
       }
   ).done((response) => {
+    $("#targetDiv").append(
+      `<div class="alert alert-success text-center" role="alert">
+      <p>Record has been Updated</p>
+      </div>`);
+
       createTargetTable();
       $('#books_table').bootstrapTable({
           pagination: true,
           search: true,
           columns: book_columns,
-            data: response
-          
-      });
+            data: [response] 
+      })
      $("#targetDiv")[0].scrollIntoView();
-  }).fail((obj, textStatus) => {
-      if(obj && obj.responseJSON && obj.responseJSON.message) {
-          alert(obj.responseJSON.message);
+  }).fail((response) => {
+    let warning = response.responseText;
+    $("#warnings").empty();
+    $("#warnings").append(`<div class="alert alert-warning text-center" role="alert"><p>${warning}</p></div>`);
+    $("#warnings")[0].scrollIntoView();
+
+  })  
+}
+
+  // *******************************
+  // DELETE methods
+  // *******************************
+/**
+ * detects if id or isbn used to delete corresponding book
+ */
+  function deleteRecord(element) {
+    console.log(element.id)
+    $("#warnings").empty();
+
+    // define url
+    if(element.id == "btn_deleteBookByID") {
+      const id = $('#book_id').val();
+      url = `${HOST}/book/id/${id}`;
+    }
+    if(element.id == "btn_deleteBookByISBN") {
+      const isbn = $('#book_isbn').val();
+      url = `${HOST}/isbn/isbn/${id}`;
+      if(isbn.length() !=10 && isbn.length() !=13) {      
+        $("#warnings").append(
+          `<div class="alert alert-warning text-center" role="alert">
+          <p>ISBN should be 10 or 13 digits long</p>
+          </div>`);
+          $("#warnings")[0].scrollIntoView();
+          throw new Error("ISBN should be 10 or 13 digits long");
       }
-      if(obj && obj.responseText) {
-          alert(obj.responseText);
+    }
+    
+    confirm("Are you sure you want to DELETE this record?")
+    // call controller
+    $.ajax(
+      {
+          method: "delete",
+          url: url
       }
-  })
-   
+  ).done((response) => {
+    $("#warnings").append(
+      `<div class="alert alert-success text-center" role="alert">
+      <p>Record has been deleted</p>
+      </div>`);
+      $("#warnings")[0].scrollIntoView();
+  }).fail((response) => {
+    let warning = response.responseText;
+    $("#warnings").append(`<div class="alert alert-warning text-center" role="alert"></div>`);
+    $("#warnings div").append(`<p>${warning}</p>`);
+    // $("#warnings").append(`<p class="text-warning text-center">${warning}</p>`);
+    $("#warnings")[0].scrollIntoView();
+
+  })  
 }

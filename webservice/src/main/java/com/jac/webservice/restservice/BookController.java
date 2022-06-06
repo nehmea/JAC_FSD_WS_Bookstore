@@ -5,7 +5,9 @@ import com.jac.webservice.exceptions.ItemExistException;
 import com.jac.webservice.exceptions.RecordDoesNotExistInDatabaseException;
 import com.jac.webservice.model.Book;
 import com.jac.webservice.service.BookService;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.NestedExceptionUtils;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,77 +25,108 @@ public class BookController {
 
     @GetMapping("")
     public ResponseEntity<List<Book>> getAllBooks() {
-
+        try {
             return new ResponseEntity<>(service.getAllBooks(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(String.format("Unable to retrieve books from the database %n" +
+                            "Root Error Cause: %s%n" +
+                            "Root Error Message: %s",
+                    NestedExceptionUtils.getMostSpecificCause(e),
+                    ExceptionUtils.getRootCauseMessage(e)),
+                    HttpStatus.NOT_FOUND);
+        }
 
     }
 
     @GetMapping("/book/id/{id}")
     public ResponseEntity<Book> getBookById(@PathVariable(value = "id") int id) {
-        try{
+        try {
             return new ResponseEntity<>(service.getBookById(id), HttpStatus.OK);
-        }
-        catch (DatabaseException exception){
-            return new ResponseEntity(exception.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity(String.format("Unable to retrieve book (id=%d) from the database %n" +
+                            "Root Error Cause: %s%n" +
+                            "Root Error Message: %s",
+                    id,
+                    NestedExceptionUtils.getMostSpecificCause(e),
+                    ExceptionUtils.getRootCauseMessage(e)),
+                    HttpStatus.NOT_FOUND);
         }
     }
 
     @GetMapping("/book/isbn/{isbn}")
     public ResponseEntity<Book> getBookByISBN(@PathVariable(value = "isbn") String isbn) {
-        try{
+        try {
             return new ResponseEntity<>(service.getBookByISBN(isbn), HttpStatus.OK);
-        }
-        catch (DataRetrievalFailureException exception){
-            return new ResponseEntity(exception.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity(String.format("Unable to retrieve book (isbn=%s) from the database %n" +
+                            "Root Error Cause: %s%n" +
+                            "Root Error Message: %s",
+                    isbn,
+                    NestedExceptionUtils.getMostSpecificCause(e),
+                    ExceptionUtils.getRootCauseMessage(e)),
+                    HttpStatus.NOT_FOUND);
         }
     }
 
     @GetMapping("/Author/{authorName}/books")
     public ResponseEntity<List<Book>> getBookByAuthor(@PathVariable(value = "authorName") String authorName) {
-        try{
+        try {
             return new ResponseEntity<>(service.getBookByAuthorName(authorName), HttpStatus.OK);
         }
-        catch (DataRetrievalFailureException exception){
-            return new ResponseEntity(exception.getMessage(), HttpStatus.NOT_FOUND);
+        catch (Exception e){
+            return new ResponseEntity(String.format("Unable to retrieve book (Author includes: %s) from the database %n" +
+                            "Root Error Cause: %s%n" +
+                            "Root Error Message: %s",
+                    authorName,
+                    NestedExceptionUtils.getMostSpecificCause(e),
+                    ExceptionUtils.getRootCauseMessage(e)),
+                    HttpStatus.NOT_FOUND);
         }
     }
 
     @PutMapping("/book/id/{id}")
     public ResponseEntity<Book> updateBookById(@PathVariable(value = "id") int id, @RequestBody Book book) {
-        try{
+        try {
             return new ResponseEntity<>(service.updateBookById(id, book), HttpStatus.OK);
-        }
-        catch (IllegalAccessException exception){
-            return new ResponseEntity(exception.getMessage(), HttpStatus.NOT_FOUND);
-        }
-        catch (RecordDoesNotExistInDatabaseException exception){
-            return new ResponseEntity(exception.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity(String.format("Unable to update book (id=%d) in the database %n" +
+                            "Root Error Cause: %s%n" +
+                            "Root Error Message: %s",
+                    id,
+                    NestedExceptionUtils.getMostSpecificCause(e),
+                    ExceptionUtils.getRootCauseMessage(e)),
+                    HttpStatus.NOT_FOUND);
         }
     }
 
     @PutMapping("/book/isbn/{isbn}")
     public ResponseEntity<Book> updateBookById(@PathVariable(value = "isbn") String isbn, @RequestBody Book book) {
-        try{
+        try {
             return new ResponseEntity<>(service.updateBookByISBN(isbn, book), HttpStatus.OK);
         }
-        catch (IllegalAccessException exception){
-            return new ResponseEntity(exception.getMessage(), HttpStatus.NOT_FOUND);
-        }
-        catch (RecordDoesNotExistInDatabaseException exception){
-            return new ResponseEntity(exception.getMessage(), HttpStatus.NOT_FOUND);
+        catch (Exception e){
+            return new ResponseEntity(String.format("Unable to update book (isbn=%s) in the database %n" +
+                            "Root Error Cause: %s%n" +
+                            "Root Error Message: %s",
+                    isbn,
+                    NestedExceptionUtils.getMostSpecificCause(e),
+                    ExceptionUtils.getRootCauseMessage(e)),
+                    HttpStatus.NOT_FOUND);
         }
     }
 
     @PostMapping("")
     public ResponseEntity<Book> saveBook(@RequestBody Book book) {
-        try{
+        try {
             return new ResponseEntity<>(service.saveBook(book), HttpStatus.OK);
         }
-        catch (ItemExistException exception){
-            return new ResponseEntity(exception.getMessage(), HttpStatus.CONFLICT);
-        }
-        catch (DatabaseException exception){
-            return new ResponseEntity(exception.getMessage(), HttpStatus.CONFLICT);
+        catch (Exception e){
+            return new ResponseEntity(String.format("Unable to save new book into the database %n" +
+                            "Root Error Cause: %s%n" +
+                            "Root Error Message: %s",
+                    NestedExceptionUtils.getMostSpecificCause(e),
+                    ExceptionUtils.getRootCauseMessage(e)),
+                    HttpStatus.NOT_FOUND);
         }
     }
 
@@ -104,8 +137,14 @@ public class BookController {
             service.deleteBookById(id);
             return new ResponseEntity("Book has been deleted", HttpStatus.OK);
         }
-        catch (Exception exc) {
-            return new ResponseEntity("Book does not exist in the repository", HttpStatus.NOT_FOUND);
+        catch (Exception e){
+            return new ResponseEntity(String.format("Unable to DELETE book (id=%d) from the database %n" +
+                            "Root Error Cause: %s%n" +
+                            "Root Error Message: %s",
+                    id,
+                    NestedExceptionUtils.getMostSpecificCause(e),
+                    ExceptionUtils.getRootCauseMessage(e)),
+                    HttpStatus.NOT_FOUND);
         }
 
     }
@@ -117,8 +156,14 @@ public class BookController {
             service.deleteBookByISBN(isbn);
             return new ResponseEntity("Book has been deleted", HttpStatus.OK);
         }
-        catch (Exception exc) {
-            return new ResponseEntity("Book does not exist in the repository", HttpStatus.NOT_FOUND);
+        catch (Exception e){
+            return new ResponseEntity(String.format("Unable to DELETE book (isbn=%s) from the database %n" +
+                            "Root Error Cause: %s%n" +
+                            "Root Error Message: %s",
+                    isbn,
+                    NestedExceptionUtils.getMostSpecificCause(e),
+                    ExceptionUtils.getRootCauseMessage(e)),
+                    HttpStatus.NOT_FOUND);
         }
     }
 }

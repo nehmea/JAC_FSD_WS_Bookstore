@@ -98,6 +98,11 @@ var navbar =
         </ul>
         </li>
         </ul>
-    </nav>`
+    </nav>
+    <br>
+    <div id="warnings"></div>`
+    
     
     $("#header").append(navbar);
+
+    $('body').append(`</br></br><div class="d-grid gap-2 col-10 mx-auto" id="targetDiv"></div>`)

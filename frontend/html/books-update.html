@@ -26,7 +26,7 @@
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label text-right" for="book_id">Book ID</label>
                     <div class="col-sm">
-                        <input class="form-control" type="number" name="book_id" id="book_id" placeholder="1">
+                        <input class="form-control" type="number" name="book_id" id="book_id">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -63,7 +63,7 @@
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label" for="release_date">Date Released</label>
                     <div class="col-sm">
-                        <input class="form-control" type="text" name="release_date" id="release_date"
+                        <input class="form-control" type="date" name="release_date" id="release_date"
                             placeholder="2014-01-28">
                     </div>
                 </div>
@@ -100,16 +100,16 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label" for="author">Author(s)</label>
+                    <label class="col-sm-2 col-form-label" for="authors">Author(s)</label>
                     <div class="col-sm">
-                        <input class="form-control" type="text" name="author" id="author"
+                        <input class="form-control" type="text" name="authors" id="authors"
                             placeholder=" Michael T. Goodrich, Roberto Tamassia, Michael H. Goldwasser">
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label" for="copies">Number of copies</label>
+                    <label class="col-sm-2 col-form-label" for="numberOfCopies">Number of copies</label>
                     <div class="col-sm">
-                        <input class="form-control" type="number" name="copies" id="copies" step="1" min="0"
+                        <input class="form-control" type="number" name="numberOfCopies" id="numberOfCopies" step="1" min="0"
                             placeholder="10">
                     </div>
                 </div>
@@ -120,9 +120,31 @@
                 <br>
         </div>
 
+        <fieldset id="get_book_by_id" class="d-grid gap-0 col-6 mx-auto">
+            <legend class="text-center">Get a Book by ID</legend>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="getBookByID_bookID" placeholder="1">
+                <label for="getBookByID_bookID">Book ID</label>
+            </div>
+            <div class="mx-auto">
+                <button class="btn btn-light" type="button"  onclick="getBookByID();">Get Record</button>
+            </div>
+        </fieldset>
+        <br>
+        <fieldset id="get_book_by_isbn" class="d-grid gap-0 col-6 mx-auto">
+            <legend class="text-center">Get a Book by ISBN</legend>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="getBookByISBN_isbn" placeholder="9781118771334">
+                <label for="getBookByISBN_isbn">ISBN</label>
+            </div>
+            <div class="mx-auto">
+                <button class="btn btn-light" type="button" onclick="getBookByISBN();">Get Record</button>
+            </div>
+        </fieldset>
+        <br>
+        
         </form>
-
-        <div class="d-grid gap-2 col-10 mx-auto" id="targetDiv"></div>
+    </div>
         <!-- script -->
         <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
         <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
@@ -132,7 +154,7 @@
         <script src="https://unpkg.com/bootstrap-table@1.20.2/dist/bootstrap-table.min.js"></script>
         <script src="../scripts/nav.js"></script>
         <script src="../scripts/books.js"></script>
-    </div>
+
 </body>
 
 </html>

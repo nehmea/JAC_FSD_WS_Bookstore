@@ -18,7 +18,7 @@ public class Book {
     private String language;
     private String binding;
     private LocalDate release_date;
-    private String Edition;
+    private String edition;
     private int pages;
     private String dimensions;
     private float rating;

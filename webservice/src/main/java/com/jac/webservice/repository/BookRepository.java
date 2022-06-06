@@ -75,8 +75,16 @@ public class BookRepository {
             throw new RecordDoesNotExistInDatabaseException("Failed to retrieve a Loan with id " + id);
         }
 
+
+        if(book.getIsbn13() != null && !book.getIsbn13().equals(fetchedBook.getIsbn13())) {
+            throw new DatabaseException(
+                    String.format("The provided ISBN (%s) is different from the ISBN (%s) in the database!",
+                    book.getIsbn13(), fetchedBook.getIsbn13())
+            );
+        }
+
         // returns the array of Field objects
-        for (Field f : book.getClass().getFields()) {
+        for (Field f : book.getClass().getDeclaredFields()) {
             f.setAccessible(true);
             if (f.get(book) == null) {
                 f.set(book, f.get(fetchedBook));
@@ -117,8 +125,8 @@ public class BookRepository {
             throw new RecordDoesNotExistInDatabaseException("Failed to retrieve a Loan with isbn " + isbn);
         }
 
-        // returns the array of Field objects
-        for (Field f : book.getClass().getFields()) {
+        // replace empty fields with those from database record
+        for (Field f : book.getClass().getDeclaredFields()) {
             f.setAccessible(true);
             if (f.get(book) == null) {
                 f.set(book, f.get(fetchedBook));
