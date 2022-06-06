@@ -2,7 +2,7 @@
 const HOST = "http://localhost:8045/customers"
 const book_columns = [{
   field: 'id',
-  title: 'Item ID',
+  title: 'Customer ID',
 }, {
   field: 'firstName',
   title: 'First Name'

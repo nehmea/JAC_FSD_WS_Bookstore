@@ -139,9 +139,9 @@ public class LoanRepository {
         Loan fetchedLoan = getLoanById(id);
 
         // returns the array of Field objects and replace empty ones from fetched record
-        for (Field f : loan.getClass().getFields()) {
+        for (Field f : loan.getClass().getDeclaredFields()) {
             f.setAccessible(true);
-            if (f.get(loan) == null) {
+            if (f.get(loan) == null || f.get(loan).equals(0)) {
                 f.set(loan, f.get(fetchedLoan));
             }
         }
