@@ -186,14 +186,14 @@ public class LoanRepository {
         LocalDate dateOut = loan.getDateOut();
 
         if (!customerRepository.checkIfCustomerExistByID(customerID)) {
-            throw new ItemExistException("No customer Exist with id=" + customerID);
+            throw new RecordDoesNotExistInDatabaseException("No customer Exist with id=" + customerID);
         }
 
         if (!bookRepository.checkIfBookExistByID(bookID)) {
-            throw new ItemExistException("No book Exist with id=" + bookID);
+            throw new RecordDoesNotExistInDatabaseException("No book Exist with id=" + bookID);
         }
 
-        if (checkIfLoanExistByBookInfo(customerID, bookID, dateOut)) {
+        if (checkIfLoanExistByInfo(customerID, bookID, dateOut)) {
             throw new ItemExistException("A record already exist with the same customer ID, book ID, and date out!");
         }
 
@@ -242,7 +242,7 @@ public class LoanRepository {
     }
 
     //A function that checks if a loan exists by info
-    public Boolean checkIfLoanExistByBookInfo(int customerID, int bookId, LocalDate dateOut) {
+    public Boolean checkIfLoanExistByInfo(int customerID, int bookId, LocalDate dateOut) {
         String sql = "SELECT count(*) FROM loans WHERE customer_id=? AND book_id=? AND date_out=?";
         int count = jdbcTemplate.queryForObject(
                 sql,
