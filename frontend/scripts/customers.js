@@ -3,36 +3,64 @@ const HOST = "http://localhost:8045/customers"
 const book_columns = [{
   field: 'id',
   title: 'Customer ID',
+  sortable: true,
+  filterControl: 'input',
+  filterStrictSearch: false
 }, {
   field: 'firstName',
-  title: 'First Name'
+  title: 'First Name',
+  sortable: true,
+  filterControl: 'input',
+  filterStrictSearch: false
 }, {
   field: 'middleName',
-  title: 'Middle Name'
+  title: 'Middle Name',
+  sortable: true,
+  filterControl: 'input',
+  filterStrictSearch: false
 }, {
   field: 'lastName',
-  title: 'Last Name'
+  title: 'Last Name',
+  sortable: true,
+  filterControl: 'input',
+  filterStrictSearch: false
 }, {
   field: 'dob',
-  title: 'Date of Birth'
+  title: 'Date of Birth',
+  sortable: true,
+  filterControl: 'input',
+  filterStrictSearch: false
 }, {
   field: 'address',
-  title: 'Address'
+  title: 'Address',
+  filterControl: 'input',
+  filterStrictSearch: false
 }, {
   field: 'city',
-  title: 'City'
+  title: 'City',
+  filterControl: 'input',
+  filterStrictSearch: false
 }, {
   field: 'state',
-  title: 'State'
+  title: 'State',
+  filterControl: 'input',
+  filterStrictSearch: false
 }, {
   field: 'zipcode',
-  title: 'Zip Code'
+  title: 'Zip Code',
+  filterControl: 'input',
+  filterStrictSearch: false
 }, {
   field: 'phone',
-  title: 'Phone Number'
+  title: 'Phone Number',
+  filterControl: 'input',
+  filterStrictSearch: false
 }, {
   field: 'registrationDate',
-  title: 'Registration Date'
+  title: 'Registration Date',
+  sortable: true,
+  filterControl: 'input',
+  filterStrictSearch: false
 }];
 
 
@@ -77,11 +105,8 @@ function getAllCustomers() {
   ).done((response) => {
     createTargetTable();
     $('#customer_table').bootstrapTable({
-      pagination: true,
-      search: true,
       columns: book_columns,
       data: response
-
     });
     $("#targetDiv")[0].scrollIntoView();
   }).fail((response) => {

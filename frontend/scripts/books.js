@@ -3,45 +3,63 @@ const HOST = "http://localhost:8045/books"
 const book_columns = [{
   field: 'id',
   title: 'Item ID',
+  sortable: true,
+  filterControl: 'input',
+  filterStrictSearch: false
 }, {
   field: 'isbn13',
-  title: 'ISBN 13'
+  title: 'ISBN 13',
+  filterControl: 'input',
+  filterStrictSearch: false
 }, {
   field: 'isbn10',
-  title: 'ISBN 10'
+  title: 'ISBN 10',
+  filterControl: 'input',
+  filterStrictSearch: false
 }, {
   field: 'title',
-  title: 'Title'
+  title: 'Title',
+  filterControl: 'input',
+  filterStrictSearch: false
 }, {
   field: 'language',
-  title: 'Language'
+  title: 'Language',
+  filterControl: 'input',
+  filterStrictSearch: false
 }, {
   field: 'binding',
   title: 'Format'
 }, {
   field: 'release_date',
+  sortable: true,
   title: 'Publication Date'
 }, {
   field: 'pages',
+  sortable: true,
   title: 'Pages'
 }, {
   field: 'dimensions',
   title: 'Dimensions'
 }, {
   field: 'rating',
+  sortable: true,
   title: 'Rating'
 }, {
   field: 'publisher',
   title: 'Publisher'
 }, {
   field: 'authors',
-  title: 'Author(s)'
+  title: 'Author(s)',
+  filterControl: 'input',
+  filterStrictSearch: false
 }, {
   field: 'numberOfCopies',
-  title: 'Number of copies'
+  title: 'Number of copies',
+  sortable: true
 }, {
   field: 'edition',
-  title: 'Edition'
+  title: 'Edition',
+  sortable: true
 }];
 
 
@@ -49,7 +67,16 @@ const book_columns = [{
  * Create new table: clear target div, then create a new table to load fetched data
  */
 function createTargetTable() {
-  $("#targetDiv").append(`<table id="books_table" class="table table-striped table-hover table-sm"></table>`)
+  $("#targetDiv").append(
+    `<table id="books_table" class="table table-striped table-hover table-sm" 
+    data-show-fullscreen="true"
+    data-show-columns="true"
+    data-show-pagination-switch="true"
+    data-pagination="true"
+    data-show-columns-toggle-all="true"
+    data-filter-control="true"
+    data-show-search-clear-button="true">
+    </table>`)
   // console.log($("#targetDiv table"));
 }
 
@@ -86,11 +113,8 @@ function getAllBooks() {
   ).done((response) => {
     createTargetTable();
     $('#books_table').bootstrapTable({
-      pagination: true,
-      search: true,
       columns: book_columns,
       data: response
-
     });
     $("#targetDiv")[0].scrollIntoView();
   }).fail((response) => {
@@ -179,12 +203,11 @@ function getBookByAuthor() {
   ).done((response) => {
     createTargetTable();
     $('#books_table').bootstrapTable({
-      pagination: true,
-      search: true,
-      columns: book_columns,
       data: response
-
-    });
+    })
+    $('#books_table').DataTable({
+      order: [[3, 'desc']],
+    });;
     $("#targetDiv")[0].scrollIntoView();
   }).fail((response) => {
     let warning = response.responseText;

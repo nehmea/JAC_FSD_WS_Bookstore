@@ -3,18 +3,33 @@ const HOST = "http://localhost:8045/loans"
 const book_columns = [{
   field: 'id',
   title: 'Loan ID',
+  sortable: true,
+  filterControl: 'input',
+  filterStrictSearch: false
 }, {
   field: 'customerId',
-  title: 'Customer ID'
+  title: 'Customer ID',
+  sortable: true,
+  filterControl: 'input',
+  filterStrictSearch: false
 }, {
   field: 'bookId',
-  title: 'Book ID'
+  title: 'Book ID',
+  sortable: true,
+  filterControl: 'input',
+  filterStrictSearch: false
 }, {
   field: 'dateOut',
-  title: 'Date Out'
+  title: 'Date Out',
+  sortable: true,
+  filterControl: 'input',
+  filterStrictSearch: false
 }, {
   field: 'dateIn',
-  title: 'Date In'
+  title: 'Date In',
+  sortable: true,
+  filterControl: 'input',
+  filterStrictSearch: false
 }];
 
 
