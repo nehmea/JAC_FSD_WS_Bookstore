@@ -1,55 +1,46 @@
 // global variables
-const HOST = "http://localhost:8045/books"
+const HOST = "http://localhost:8045/customers"
 const book_columns = [{
   field: 'id',
   title: 'Item ID',
 }, {
-  field: 'isbn13',
-  title: 'ISBN 13'
+  field: 'firstName',
+  title: 'First Name'
 }, {
-  field: 'isbn10',
-  title: 'ISBN 10'
+  field: 'middleName',
+  title: 'Middle Name'
 }, {
-  field: 'title',
-  title: 'Title'
+  field: 'lastName',
+  title: 'Last Name'
 }, {
-  field: 'language',
-  title: 'Language'
+  field: 'dob',
+  title: 'Date of Birth'
 }, {
-  field: 'binding',
-  title: 'Format'
+  field: 'address',
+  title: 'Address'
 }, {
-  field: 'release_date',
-  title: 'Publication Date'
+  field: 'city',
+  title: 'City'
 }, {
-  field: 'pages',
-  title: 'Pages'
+  field: 'state',
+  title: 'State'
 }, {
-  field: 'dimensions',
-  title: 'Dimensions'
+  field: 'zipcode',
+  title: 'Zip Code'
 }, {
-  field: 'rating',
-  title: 'Rating'
+  field: 'phone',
+  title: 'Phone Number'
 }, {
-  field: 'publisher',
-  title: 'Publisher'
-}, {
-  field: 'authors',
-  title: 'Author(s)'
-}, {
-  field: 'numberOfCopies',
-  title: 'Number of copies'
-}, {
-  field: 'edition',
-  title: 'Edition'
+  field: 'registrationDate',
+  title: 'Registration Date'
 }];
 
 
 /**
  * Create new table: clear target div, then create a new table to load fetched data
  */
-function createTargetTable() {
-  $("#targetDiv").append(`<table id="books_table" class="table table-striped table-hover table-sm"></table>`)
+ function createTargetTable() {
+  $("#targetDiv").append(`<table id="customer_table" class="table table-striped table-hover table-sm"></table>`)
   // console.log($("#targetDiv table"));
 }
 
@@ -73,9 +64,9 @@ function convertFormToJSON(form) {
 // Retrieve/get/fetch methods
 // *******************************
 /**
- * get All books
+ * get All customers
  */
-function getAllBooks() {
+function getAllCustomers() {
   $("#warnings").empty();
   $("#targetDiv").empty();
   $.ajax(
@@ -85,7 +76,7 @@ function getAllBooks() {
     }
   ).done((response) => {
     createTargetTable();
-    $('#books_table').bootstrapTable({
+    $('#customer_table').bootstrapTable({
       pagination: true,
       search: true,
       columns: book_columns,
@@ -103,20 +94,20 @@ function getAllBooks() {
 }
 
 /**
- * get a book by its id
+ * get a customer by its id
  */
-function getBookByID() {
+function getCustomerByID() {
   $("#warnings").empty();
   $("#targetDiv").empty();
-  let id = document.getElementById('getBookByID_bookID').value;
+  let id = document.getElementById('customerID').value;
   $.ajax(
     {
       method: "get",
-      url: `${HOST}/book/id/${id}`
+      url: `${HOST}/customer/id/${id}`
     }
   ).done((response) => {
     createTargetTable();
-    $('#books_table').bootstrapTable({
+    $('#customer_table').bootstrapTable({
       pagination: true,
       search: true,
       columns: book_columns,
@@ -134,56 +125,35 @@ function getBookByID() {
 }
 
 /**
- * get a book by its ISBN
+ * get a customer by its first name, last name, and dob
  */
-function getBookByISBN() {
+function getCustomerByInfo() {
   $("#warnings").empty();
   $("#targetDiv").empty();
-  let id = document.getElementById('getBookByISBN_isbn').value;
+  let firstName = document.getElementById('getCustomerByInfo_firstName').value;
+  let lastName = document.getElementById('getCustomerByInfo_lastName').value;
+  let dob =  document.getElementById('getCustomerByInfo_dob').value;
   $.ajax(
     {
-      method: "get",
-      url: `${HOST}/book/isbn/${id}`
+      method: "post",
+      url: `${HOST}/customer`,
+      data: JSON.stringify({
+        "firstName": firstName,
+        "lastName": lastName,
+        "dob": dob
+    }),
+    headers: {
+      "Accept": "application/json",
+      "Content-type": "application/json"
+    }
     }
   ).done((response) => {
     createTargetTable();
-    $('#books_table').bootstrapTable({
+    $('#customer_table').bootstrapTable({
       pagination: true,
       search: true,
       columns: book_columns,
       data: [response]
-
-    });
-    $("#targetDiv")[0].scrollIntoView();
-  }).fail((response) => {
-    let warning = response.responseText;
-    $("#warnings").append(`<div class="alert alert-warning text-center" role="alert"><p>${warning}</p></div>`);
-    $("#warnings")[0].scrollIntoView();
-    console.log(warning);
-
-  })
-}
-
-/**
- * get a book by authorname (pattern)
- */
-function getBookByAuthor() {
-  $("#warnings").empty();
-  $("#targetDiv").empty();
-  let authorName = document.getElementById('getBookByAuthor_authorName').value;
-  $.ajax(
-    {
-      method: "get",
-      url: `${HOST}/Author/${authorName}/books`
-    }
-  ).done((response) => {
-    createTargetTable();
-    $('#books_table').bootstrapTable({
-      pagination: true,
-      search: true,
-      columns: book_columns,
-      data: response
-
     });
     $("#targetDiv")[0].scrollIntoView();
   }).fail((response) => {
@@ -200,13 +170,13 @@ function getBookByAuthor() {
 // save/post methods
 // *******************************
 /**
- * Save a new book to the database
+ * Save a new customer to the database
  */
 function saveRecord() {
   $("#warnings").empty();
   $("#targetDiv").empty();
 
-  const form = $("#book_update_form");
+  const form = $("#customer_update_form");
   const json_data = JSON.stringify(convertFormToJSON(form));
   $.ajax(
     {
@@ -225,7 +195,7 @@ function saveRecord() {
       </div>`);
 
     createTargetTable();
-    $('#books_table').bootstrapTable({
+    $('#customer_table').bootstrapTable({
       pagination: true,
       search: true,
       columns: book_columns,
@@ -254,30 +224,24 @@ function updateRecord() {
   $("#targetDiv").empty();
 
   // declare variables
-  const id = $('#book_id').val();
-  const isbn = $('#isbn13').val();
-  const form = $("#book_update_form");
+  const id = $('#id').val();
+  const form = $("#customer_update_form");
   const json_data = JSON.stringify(convertFormToJSON(form));
   // define URL based on provided id or isbn
-  if (id == "" && isbn == "") {
+  if (id == "") {
     $("#warnings").append(
       `<div class="alert alert-warning text-center" role="alert">
-        <p>Please supply a book ID or ISBN to update a record</p>
+        <p>Please supply a Customer ID to update a record</p>
         </div>`);
     $("#warnings")[0].scrollIntoView();
-    throw new Error("Please supply a book ID or ISBN to update a record");
-  }
-  if (id) {
-    url = `${HOST}/book/id/${id}`;
-  } else if (isbn) {
-    url = `${HOST}/book/isbn/${isbn}`;
+    throw new Error("Please supply a Customer ID to update a record");
   }
 
   // call controller
   $.ajax(
     {
       method: "put",
-      url: url,
+      url: `${HOST}/customer/id/${id}`,
       data: json_data,
       headers: {
         "Accept": "application/json",
@@ -291,7 +255,7 @@ function updateRecord() {
       </div>`);
 
     createTargetTable();
-    $('#books_table').bootstrapTable({
+    $('#customer_table').bootstrapTable({
       pagination: true,
       search: true,
       columns: book_columns,
@@ -313,26 +277,20 @@ function updateRecord() {
 /**
  * detects if id or isbn used to delete corresponding book
  */
-function deleteRecord(element) {
+function deleteRecord() {
   $("#warnings").empty();
   $("#targetDiv").empty();
 
   // define url
-  if (element.id == "btn_deleteBookByID") {
-    const id = $('#book_id').val();
-    url = `${HOST}/book/id/${id}`;
-  }
-  if (element.id == "btn_deleteBookByISBN") {
-    const isbn = $('#book_isbn').val();
-    url = `${HOST}/isbn/isbn/${id}`;
-    if (isbn.length() != 10 && isbn.length() != 13) {
+  const id = $('#customer_id').val();
+  url = `${HOST}/customer/id/${id}`;
+  if (id == "") {
       $("#warnings").append(
         `<div class="alert alert-warning text-center" role="alert">
-          <p>ISBN should be 10 or 13 digits long</p>
+          <p>Please provide a customer id</p>
           </div>`);
       $("#warnings")[0].scrollIntoView();
-      throw new Error("ISBN should be 10 or 13 digits long");
-    }
+      throw new Error("Please provide a customer id");
   }
 
   confirm("Are you sure you want to DELETE this record?")

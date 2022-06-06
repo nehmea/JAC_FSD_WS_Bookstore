@@ -58,7 +58,7 @@ public class CustomerController {
         }
     }
 
-    @GetMapping("/customer")
+    @PostMapping("/customer")
     public ResponseEntity<Customer> getCustomerByInfo(@RequestBody Customer customer) {
         String firstName = customer.getFirstName();
         String lastName = customer.getLastName();

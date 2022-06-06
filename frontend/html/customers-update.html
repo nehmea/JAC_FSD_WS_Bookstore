@@ -10,115 +10,23 @@
     <!-- styles -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.20.2/dist/bootstrap-table.min.css">
+    <!-- custome style -->
     <link rel="stylesheet" href="../css/style.css">
-
-    <!-- script -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-        crossorigin="anonymous"></script>
 </head>
 
 <body>
     <div class="container mx-auto" id="books-update-container">
-        <header>
-            <nav>
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../index.html">Home</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                            aria-expanded="false">Books</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="books-fetch.html">Fetch</a></li>
-                            <li><a class="dropdown-item" href="#">List All Books</a></li>
-                            <li><a class="dropdown-item" href="#">Get a Book by ID</a></li>
-                            <li><a class="dropdown-item" href="#">Get a Book by ISBN</a></li>
-                            <li><a class="dropdown-item" href="#">Get a Book by Author Name</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                                <a href="books-update.html">Update</a>
-                            </li>
-                            <li><a class="dropdown-item" href="books-update.html">Update a Book by ID</a></li>
-                            <li><a class="dropdown-item" href="books-update.html">Update a Book by ISBN</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                                <a href="books-update.html">Save</a>
-                            </li>
-                            <li><a class="dropdown-item" href="books-update.html">Save a New Book</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                                <a href="books-delete.html">Delete</a>
-                            </li>
-                            <li><a class="dropdown-item" href="#">Delete a Book by ID</a></li>
-                            <li><a class="dropdown-item" href="#">Delete a Book by ISBN</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                            aria-expanded="false">Customers</a>
-                        <ul class="dropdown-menu">
-                                <li><a href="">Fetch</a></li>
-                            <li><a class="dropdown-item" href="#">List All Customers</a></li>
-                            <li><a class="dropdown-item" href="#">Get a Customer by ID</a></li>
-                            <li><a class="dropdown-item" href="#">Get a Customer by Information</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                                <li><a href="">Update</a></li>
-                            </li>
-                            <li><a class="dropdown-item" href="#">Update a Customer by ID</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                                <li><a href="">Save</a></li>
-                            </li>
-                            <li><a class="dropdown-item" href="#">Save a New Customer</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                                <li><a href="">Delete</a></li>
-                            </li>
-                            <li><a class="dropdown-item" href="#">Delete a Customer by ID</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                            aria-expanded="false">Loans</a>
-                        <ul class="dropdown-menu">
-                                <li><a href="">Fetch</a></li>
-                            <li><a class="dropdown-item" href="#">List All Loans</a></li>
-                            <li><a class="dropdown-item" href="#">Get a Loan by ID</a></li>
-                            <li><a class="dropdown-item" href="#">Get Loans by Customer ID</a></li>
-                            <li><a class="dropdown-item" href="#">Get Loans by Book ID</a></li>
-                            <li><a class="dropdown-item" href="#">Get Loans by Book ISBN</a></li>
-                            <li><a class="dropdown-item" href="#">Get Last Loan of a Customer</a></li>
-                            <li><a class="dropdown-item" href="#">Get Last Loan of a Customer</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                                <a href="">Update</a>
-                            </li>
-                            <li><a class="dropdown-item" href="#">Update a Loan by ID</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                                <li><a href="">Save</a></li>
-                            </li>
-                            <li><a class="dropdown-item" href="#">Save a New Loan</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                                <li><a href="">Delete</a></li>
-                            </li>
-                            <li><a class="dropdown-item" href="#">Delete a Loan by ID</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-        </header>
+        <header id="header"></header>
 
         <div class="d-grid gap-2 col-6 mx-auto">
             <h1 class="text-center">Update a Customer Record</h1>
-            <form action="#" >
+            <form action="#" id="customer_update_form">
                 <div class="row mb-3">
-                    <label class="col-sm-3 col-form-label text-right" for="customer_id">Customer ID</label>
+                    <label class="col-sm-3 col-form-label text-right" for="id">Customer ID</label>
                     <div class="col-sm">
-                        <input class="form-control" type="number" name="customer_id" id="customer_id" placeholder="1">
+                        <input class="form-control" type="number" name="id" id="id" placeholder="1">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -176,23 +84,33 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class="col-sm-3 col-form-label" for="registration_date">Registration Date</label>
+                    <label class="col-sm-3 col-form-label" for="registrationDate">Registration Date</label>
                     <div class="col-sm">
-                        <input class="form-control" type="date" name="registration_date" id="registration_date">
+                        <input class="form-control" type="date" name="registrationDate" id="registrationDate">
                     </div>
                 </div>
 
                 <br>
 
                 <div class="d-grid gap-5 d-md-flex justify-content-end">
-                    <button class="btn btn-light" type="button">Update Record</button>
-                    <button class="btn btn-light" type="button">Save New Record</button>
+                    <button class="btn btn-light" type="button" onclick="updateRecord();">Update Record</button>
+                    <button class="btn btn-light" type="button" onclick="saveRecord();">Save New Record</button>
                 </div>
                 <br>
         </div>
 
     </form>
 </div>
+
+ <!-- scripts -->
+ <script src="../scripts/customers.js"></script>
+ <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+ <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+     crossorigin="anonymous"></script>
+ <script src="https://unpkg.com/bootstrap-table@1.20.2/dist/bootstrap-table.min.js"></script>
+ <script src="../scripts/nav.js"></script>
 </body>
 
 </html>

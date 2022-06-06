@@ -92,7 +92,7 @@ public class CustomerRepository {
         Customer fetchedCustomer = getCustomerById(id);
 
         // returns the array of Field objects
-        for (Field f : customer.getClass().getFields()) {
+        for (Field f : customer.getClass().getDeclaredFields()) {
             f.setAccessible(true);
             if (f.get(customer) == null) {
                 f.set(customer, f.get(fetchedCustomer));

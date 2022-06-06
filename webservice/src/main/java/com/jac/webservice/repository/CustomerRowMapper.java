@@ -24,6 +24,7 @@ public class CustomerRowMapper implements RowMapper<Customer> {
         customer.setDob(rs.getDate("date_of_birth").toLocalDate());
         customer.setAddress(rs.getString("address"));
         customer.setCity(rs.getString("city"));
+        customer.setState(rs.getString("state"));
         customer.setZipcode(rs.getString("zipcode"));
         customer.setPhone(rs.getString("phone"));
         if ((rs.getDate("registration_date") == null)) {

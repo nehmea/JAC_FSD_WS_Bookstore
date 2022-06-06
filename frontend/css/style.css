@@ -19,7 +19,7 @@
 }
 
 /* Books */
-#books-container {
+.container {
     background-color: antiquewhite;
     background-image: url("../images/background-book.jpg");
     background-repeat: no-repeat;
@@ -39,47 +39,7 @@ label {
     font-weight: bold;
 }
 
-/* Books fetch */
-#books-fetch-container {
-    background-color: antiquewhite;
-    background-image: url("../images/background-book.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    height: 100%;
-}
 
 h1 {
     margin: 20px;
-}
-
-/* Books update */
-#books-update-container {
-    background-color: antiquewhite;
-    background-image: url("../images/background-book.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    height: 100%;
-}
-
-
-/* Books delete */
-#books-delete-container {
-    background-color: antiquewhite;
-    background-image: url("../images/background-book.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    height: 100vh;
-}
-
-/* Customers fetch */
-#customers-fetch-container {
-    background-color: antiquewhite;
-    background-image: url("../images/background-book.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    height: 100%;
 }
