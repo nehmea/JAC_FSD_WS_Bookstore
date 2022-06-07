@@ -403,8 +403,8 @@ function deleteRecord(element) {
   }
   if (element.id == "btn_deleteBookByISBN") {
     const isbn = $('#book_isbn').val();
-    url = `${HOST}/isbn/isbn/${id}`;
-    if (isbn.length() != 10 && isbn.length() != 13) {
+    url = `${HOST}/book/isbn/${isbn}`;
+    if (isbn.length != 10 && isbn.length != 13) {
       $("#warnings").append(
         `<div class="alert alert-warning text-center" role="alert">
           <p>ISBN should be 10 or 13 digits long</p>
