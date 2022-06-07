@@ -43,3 +43,7 @@ label {
 h1 {
     margin: 20px;
 }
+
+.card-text {
+    margin: 1px;
+}

@@ -94,7 +94,70 @@ function convertFormToJSON(form) {
   return json;
 }
 
+// get book's thumbnail from open library
+function getThumbnail(isbn) {
+  var img_url = $.ajax({
+    url: "https://openlibrary.org/api/books?bibkeys=ISBN:" + isbn + "&format=json",
+    async: false
+  }).responseJSON
+  img_url = Object.values(img_url)[0].thumbnail_url
 
+  return img_url
+
+}
+
+
+// create one card from JSON
+/**
+ * 
+ * @param {String} targetDiv 
+ * @param {JSON} response 
+ */
+function createOneCardFromJSON(targetDiv, response) {
+  let img_url = `https://covers.openlibrary.org/b/isbn/${response.isbn13}-L.jpg`;
+  let ol_url = `https://openlibrary.org/isbn/${response.isbn13}`
+  $(targetDiv).append(
+    `<div class="col-sm-3 mx-auto">
+      <div class="card border-dark mb-3" id="card_book_${response.id}">
+      <div class="card-header text-center">
+      <img src="${img_url}" alt="Cover image not available" class="card-img-top">
+      <h5 class="font-weight-bold">${response.title}</h5>
+      <br>
+        <h6 class="card-subtitle mb-2 text-muted"><b>Book ID:</b> ${response.id}</h6>
+        <h6 class="card-subtitle mb-2 text-muted"><b>ISBN-13:</b> ${response.isbn13}</h6>
+        <h6 class="card-subtitle mb-2 text-muted"><b>ISBN-10:</b> ${response.isbn10}</h6>
+        </div>
+      <div class="card-body">
+        <p class="card-text"><b>Language:</b> ${response.language}</p>
+        <p class="card-text"><b>Binding:</b> ${response.binding}</p>
+        <p class="card-text"><b>Publication Date:</b> ${response.release_date}</p>
+        <p class="card-text"><b>Edition:</b> ${response.edition}</p>
+        <p class="card-text"><b>Page:</b> ${response.pages}</p>
+        <p class="card-text"><b>Dimesnions:</b> ${response.dimensions}</p>
+        <p class="card-text"><b>Rating:</b> ${response.rating}</p>
+        <p class="card-text"><b>Publisher:</b> ${response.publisher}</p>
+        <p class="card-text"><b>Authors:</b> ${response.authors}</p>
+        <p class="card-text"><b>Number of Copies:</b> ${response.numberOfCopies}</p>
+        <br>
+        <div class="text-center"><a href="${ol_url}" class="btn btn-secondary">See on Open Library</a></div>
+        </div>
+        </div>
+        </div>
+        `);
+  //   $.each(JSON, function(key, value){
+  //     $(`#card_book_${JSON.id}`).append(`<p class="card-text">${key}: ${value}</p>`)
+  // });
+  // $(`#card_book_${JSON.id}`).append(`</div></div>`);
+}
+
+
+// create multiple card from JSON
+function createMultipleCardsFromJSON(JSONarray) {
+  $("#targetDiv").append(`<div class="row" id="cards_div"></div>`)
+  $.each(JSONarray, function (index, response) {
+    createOneCardFromJSON("#cards_div", response)
+  });
+}
 
 // *******************************
 // Retrieve/get/fetch methods
@@ -139,13 +202,13 @@ function getBookByID() {
       url: `${HOST}/book/id/${id}`
     }
   ).done((response) => {
-    createTargetTable();
-    $('#books_table').bootstrapTable({
-     
-      columns: book_columns,
-      data: [response]
+    // createTargetTable();
+    // $('#books_table').bootstrapTable({
 
-    });
+    //   columns: book_columns,
+    //   data: [response]
+    // });
+    createOneCardFromJSON("#targetDiv", response);
     $("#targetDiv")[0].scrollIntoView();
   }).fail((response) => {
     let warning = response.responseText;
@@ -162,20 +225,14 @@ function getBookByID() {
 function getBookByISBN() {
   $("#warnings").empty();
   $("#targetDiv").empty();
-  let id = document.getElementById('getBookByISBN_isbn').value;
+  let isbn = document.getElementById('getBookByISBN_isbn').value;
   $.ajax(
     {
       method: "get",
-      url: `${HOST}/book/isbn/${id}`
+      url: `${HOST}/book/isbn/${isbn}`
     }
   ).done((response) => {
-    createTargetTable();
-    $('#books_table').bootstrapTable({
-     
-      columns: book_columns,
-      data: [response]
-
-    });
+    createOneCardFromJSON("#targetDiv", response);
     $("#targetDiv")[0].scrollIntoView();
   }).fail((response) => {
     let warning = response.responseText;
@@ -199,13 +256,11 @@ function getBookByAuthor() {
       url: `${HOST}/Author/${authorName}/books`
     }
   ).done((response) => {
-    createTargetTable();
-    $('#books_table').bootstrapTable({
-      data: response
-    })
-    $('#books_table').DataTable({
-      order: [[3, 'desc']],
-    });;
+    // createTargetTable();
+    // $('#books_table').bootstrapTable({
+    //   data: response
+    // })
+    createMultipleCardsFromJSON(response);
     $("#targetDiv")[0].scrollIntoView();
   }).fail((response) => {
     let warning = response.responseText;
@@ -247,7 +302,7 @@ function saveRecord() {
 
     createTargetTable();
     $('#books_table').bootstrapTable({
-     
+
       columns: book_columns,
       data: [response]
 
@@ -312,7 +367,7 @@ function updateRecord() {
 
     createTargetTable();
     $('#books_table').bootstrapTable({
-     
+
       columns: book_columns,
       data: [response]
     })
