@@ -36,7 +36,7 @@ CREATE TABLE `books` (
   UNIQUE KEY `isbn10_UNIQUE` (`isbn10`)
 ) ENGINE=InnoDB AUTO_INCREMENT=515 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `loans_v2` (
+CREATE TABLE `loans` (
   `id` int NOT NULL AUTO_INCREMENT,
   `customer_id` int NOT NULL,
   `book_id` int NOT NULL,
