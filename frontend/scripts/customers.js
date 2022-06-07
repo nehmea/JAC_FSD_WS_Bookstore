@@ -1,3 +1,8 @@
+/**
+ * Developed by: Ali Nehme
+ * Developed on: June 7, 2022
+ */
+
 // global variables
 const HOST = "http://localhost:8045/customers"
 const book_columns = [{

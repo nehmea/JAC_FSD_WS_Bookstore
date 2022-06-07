@@ -1,3 +1,8 @@
+/**
+ * Developed by: Ali Nehme
+ * Developed on: June 7, 2022
+ */
+
 var navbar =
     `<nav>
         <ul class="nav nav-tabs">

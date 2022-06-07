@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- Developed by: Ali Nehme -->
+<!-- Developed on: June 7, 2022 -->
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,8 +25,8 @@
 
         <div class="d-grid gap-2 col-6 mx-auto">
             <h1 class="text-center">Update a Loan Record</h1>
-                <form id="loan_update_form">
-                    <fieldset>
+            <form id="loan_update_form">
+                <fieldset>
                     <legend class="text-center">Update/Save new Record</legend>
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label text-right" for="loan_id">Loan ID</label>
@@ -34,8 +37,7 @@
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label text-right" for="customerId">Customer ID</label>
                         <div class="col-sm">
-                            <input class="form-control" type="number" name="customerId" id="customerId"
-                                placeholder="2">
+                            <input class="form-control" type="number" name="customerId" id="customerId" placeholder="2">
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -57,18 +59,18 @@
                         </div>
                     </div>
                 </fieldset>
-                    <br>
-
-                    <div class="d-grid gap-5 d-md-flex justify-content-end">
-                        <button class="btn btn-light" type="button" onclick="updateRecord();">Update Record</button>
-                        <button class="btn btn-light" type="button" onclick="saveRecord();">Save New Record</button>
-                    </div>
-                </form>
-
                 <br>
 
-                <form id="loan_date_update_form">
-                    <fieldset>
+                <div class="d-grid gap-5 d-md-flex justify-content-end">
+                    <button class="btn btn-light" type="button" onclick="updateRecord();">Update Record</button>
+                    <button class="btn btn-light" type="button" onclick="saveRecord();">Save New Record</button>
+                </div>
+            </form>
+
+            <br>
+
+            <form id="loan_date_update_form">
+                <fieldset>
                     <legend class="text-center">Update Date In of a Loan</legend>
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label text-right" for="loan_id">Loan ID</label>
@@ -83,13 +85,13 @@
                         </div>
                     </div>
                 </fieldset>
-                    <br>
-                    <div class="d-grid gap-5 d-md-flex justify-content-end">
-                        <button class="btn btn-light" type="button" onclick="updateRecordDateIn();">Update Record</button>
-                    </div>
-                </form>
                 <br>
-                <br>
+                <div class="d-grid gap-5 d-md-flex justify-content-end">
+                    <button class="btn btn-light" type="button" onclick="updateRecordDateIn();">Update Record</button>
+                </div>
+            </form>
+            <br>
+            <br>
             </form>
         </div>
     </div>
